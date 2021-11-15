@@ -25,7 +25,7 @@ export function DevTable({ devs }) {
       </Thead>
       <Tbody>
         {devs.map((dev) => (
-          <Tr>
+          <Tr key={dev.devId}>
             <Td isNumeric>{dev.devId}</Td>
             <Td>{dev.skills.join(", ")}</Td>
           </Tr>
