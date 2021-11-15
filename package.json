@@ -11,6 +11,7 @@
     "framer-motion": "^4.1.17",
     "react": "^16.6.1",
     "react-dom": "^16.6.1",
+    "react-hook-form": "^7.19.5",
     "react-scripts": "^4.0.3"
   },
   "scripts": {

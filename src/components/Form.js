@@ -1,62 +1,40 @@
-import React, { useState, useCallback } from "react";
-import { ButtonGroup, Button, Input, Stack } from "@chakra-ui/react";
+import React from "react";
+import { useForm } from "react-hook-form";
+import { Stack, ButtonGroup, Button, Input } from "@chakra-ui/react";
 
 import { addDev } from "../services/db";
 
 export function Form({ onSubmit, onDismiss }) {
-  const [devId, setDevId] = useState("");
-  const [skills, setSkills] = useState("");
+  const { register, handleSubmit } = useForm();
 
-  const onDevIdChange = useCallback(
-    (e) => {
-      const newDevId = e.target.value;
-      setDevId(newDevId);
-    },
-    [setDevId]
-  );
-
-  const onSkillsChange = useCallback(
-    (e) => {
-      const newSkills = e.target.value;
-      setSkills(newSkills);
-    },
-    [setSkills]
-  );
-
-  const submitDev = useCallback(async () => {
+  const submitDev = async ({ devId, skills }) => {
     const skillArray = skills.replace(/, | ,/g, ",").split(",");
+
     if (devId && skillArray.length > 0) {
       await addDev({ devId, skills: skillArray });
     }
-    setDevId("");
-    setSkills("");
+
     onSubmit();
-  }, [devId, skills]);
+  };
 
   return (
-    <Stack spacing={3}>
-      <Input
-        value={devId}
-        onChange={onDevIdChange}
-        variant={devId ? "filled" : undefined}
-        size="lg"
-        placeholder="Dev ID"
-      />
-      <Input
-        value={skills}
-        onChange={onSkillsChange}
-        variant={skills ? "filled" : undefined}
-        size="lg"
-        placeholder="Skills (comma separated)"
-      />
-      <ButtonGroup spacing="6" alignItems="right">
-        <Button colorScheme="blue" size="lg" onClick={submitDev}>
-          Submit
-        </Button>
-        <Button colorScheme="red" size="lg" onClick={onDismiss}>
-          Cancel
-        </Button>
-      </ButtonGroup>
-    </Stack>
+    <form onSubmit={handleSubmit(submitDev)}>
+      <Stack spacing={3}>
+        <Input {...register("devId")} size="lg" placeholder="Dev ID" />
+        <Input
+          {...register("skills")}
+          size="lg"
+          placeholder="Skills (comma separated)"
+        />
+        <ButtonGroup spacing="6" alignItems="right">
+          <Button colorScheme="blue" size="lg" type="submit">
+            Submit
+          </Button>
+          <Button colorScheme="red" size="lg" onClick={onDismiss}>
+            Cancel
+          </Button>
+        </ButtonGroup>
+      </Stack>
+    </form>
   );
 }
