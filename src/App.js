@@ -1,20 +1,14 @@
-import React, { useCallback } from "react";
+import React from "react";
 import { useEffect, useState } from "react";
 import { ChakraProvider } from "@chakra-ui/react";
 
 import "./App.css";
-import { getDevCount, getDevs } from "./services/db";
+import { getDevs } from "./services/db";
 import { Form } from "./components/Form";
 import { DevTable } from "./components/DevTable";
 
 function App() {
-  const [devCount, setDevCount] = useState(null);
   const [devs, setDevs] = useState(null);
-
-  async function getCount() {
-    const count = await getDevCount();
-    setDevCount(count);
-  }
 
   const fetchDevs = async () => {
     const devs = await getDevs();
@@ -22,15 +16,6 @@ function App() {
   };
 
   useEffect(() => {
-    getCount();
-  }, []);
-
-  useEffect(() => {
-    fetchDevs();
-  }, []);
-
-  const onUpdate = useCallback(() => {
-    getCount();
     fetchDevs();
   }, []);
 
@@ -50,9 +35,7 @@ function App() {
           !
         </h2>
         <br />
-        <h2>The current Dev count is:</h2>
-        <p>{devCount !== null ? devCount : "Loading Devs..."}</p>
-        <Form onSubmit={onUpdate} />
+        <Form onSubmit={fetchDevs} />
         <DevTable devs={devs} />
       </main>
     </ChakraProvider>
