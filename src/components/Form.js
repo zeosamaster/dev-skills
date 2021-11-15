@@ -1,9 +1,9 @@
 import React, { useState, useCallback } from "react";
-import { Button, Input, Stack } from "@chakra-ui/react";
+import { ButtonGroup, Button, Input, Stack } from "@chakra-ui/react";
 
 import { addDev } from "../services/db";
 
-export function Form({ onSubmit }) {
+export function Form({ onSubmit, onDismiss }) {
   const [devId, setDevId] = useState("");
   const [skills, setSkills] = useState("");
 
@@ -49,9 +49,14 @@ export function Form({ onSubmit }) {
         size="lg"
         placeholder="Skills (comma separated)"
       />
-      <Button colorScheme="blue" size="lg" onClick={submitDev}>
-        Submit
-      </Button>
+      <ButtonGroup spacing="6" alignItems="right">
+        <Button colorScheme="blue" size="lg" onClick={submitDev}>
+          Submit
+        </Button>
+        <Button colorScheme="red" size="lg" onClick={onDismiss}>
+          Cancel
+        </Button>
+      </ButtonGroup>
     </Stack>
   );
 }
