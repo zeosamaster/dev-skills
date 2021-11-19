@@ -1,5 +1,6 @@
 import React from "react";
 import { ChakraProvider, SimpleGrid, Heading } from "@chakra-ui/react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import "./App.css";
 import { Devs } from "./pages/Devs";
@@ -12,8 +13,12 @@ function App() {
       <main>
         <SimpleGrid columns={1} spacing={10}>
           <Heading>Dev DAO - Dev Skills</Heading>
-          <AddDev />
-          <Devs />
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Devs />} />
+              <Route path="/add" element={<AddDev />} />
+            </Routes>
+          </BrowserRouter>
           <Footer />
         </SimpleGrid>
       </main>
