@@ -4,7 +4,7 @@ import { Stack, ButtonGroup, Button, Input } from "@chakra-ui/react";
 
 import { addDev } from "../services/db";
 
-export function Form({ onSubmit, onDismiss }) {
+export function AddDevForm({ onSubmit, onDismiss }) {
   const { register, handleSubmit } = useForm();
 
   const submitDev = async ({ devId, skills }) => {
