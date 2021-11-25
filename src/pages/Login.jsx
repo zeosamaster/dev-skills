@@ -11,6 +11,14 @@ export function Login() {
   const { register, handleSubmit, formState: { errors }, setError } = useForm();
   const navigate = useNavigate();
 
+  const onMagicLink = React.useCallback(async ({ email }) => {
+    const { error } = await sendMagicLink({ email });
+
+    if (!error) {
+      return navigate('/login-magic-link');
+    }
+  }, []);
+
   const onLogin = React.useCallback(async ({ email, password }) => {
     if (!password) {
       return setError("password", { message: "Required field" });
@@ -57,7 +65,7 @@ export function Login() {
       </FormControl>
 
       <FormControl id="magic-link" mt="20px">
-        <Button colorScheme="teal" variant="outline" onClick={handleSubmit(sendMagicLink)}>
+        <Button colorScheme="teal" variant="outline" onClick={handleSubmit(onMagicLink)}>
           Just send me an email
         </Button>
       </FormControl>
