@@ -6,6 +6,7 @@ import "./App.css";
 import { Devs } from "./pages/Devs";
 import { AddDev } from "./pages/AddDev";
 import { Footer } from "./components/Footer";
+import { Login } from "./pages/Login";
 import { Signup } from "./pages/Signup";
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Devs />} />
               <Route path="/add" element={<AddDev />} />
+              <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
             </Routes>
           </BrowserRouter>
