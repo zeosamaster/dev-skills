@@ -1,5 +1,6 @@
 import { Flex, Heading } from "@chakra-ui/layout";
 import { Link } from "react-router-dom";
+import { UserAccount } from "./UserAccount";
 
 export function Header() {
   return (
@@ -17,6 +18,8 @@ export function Header() {
           <Link to="/">Dev DAO - Dev Skills</Link>
         </Heading>
       </Flex>
+
+      <UserAccount />
     </Flex>
   )
 }
