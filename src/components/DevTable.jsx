@@ -1,18 +1,24 @@
 import React from "react";
-import {
-  Table,
-  TableCaption,
-  Thead,
-  Tbody,
-  Tr,
-  Th,
-  Td,
-} from "@chakra-ui/react";
+import { Table, TableCaption, Thead, Tbody, Tr, Th } from "@chakra-ui/react";
+
+import { Web3Context } from "../context/web3-context";
+import { CurrentDev, Dev } from "./DevTableRow";
 
 export function DevTable({ devs }) {
+  const { devId } = React.useContext(Web3Context);
+
   if (!devs || !devs.length) {
     return <p>Loading devs...</p>;
   }
+
+  let currentDev = null;
+  const otherDevs = devs.filter((d) => {
+    if (Number(d.devId) === Number(devId)) {
+      currentDev = d;
+      return false;
+    }
+    return true;
+  });
 
   return (
     <Table variant="simple">
@@ -24,11 +30,9 @@ export function DevTable({ devs }) {
         </Tr>
       </Thead>
       <Tbody>
-        {devs.map((dev) => (
-          <Tr key={dev.devId}>
-            <Td isNumeric>{dev.devId}</Td>
-            <Td>{dev.skills.join(", ")}</Td>
-          </Tr>
+        <CurrentDev dev={currentDev} devId={devId} />
+        {otherDevs.map((dev) => (
+          <Dev dev={dev} />
         ))}
       </Tbody>
     </Table>
