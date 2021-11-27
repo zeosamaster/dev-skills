@@ -6,6 +6,10 @@ export async function addDev({ devId, skills }) {
 }
 
 export async function getDevs() {
-  const { data } = await api.from("Devs").select(`*`);
+  const { data } = await api
+    .from("Devs")
+    .select(`*`)
+    .order("devId", { ascending: true });
+
   return data;
 }
