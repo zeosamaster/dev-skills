@@ -1,5 +1,5 @@
 import React from "react";
-import { getDevs, addDev } from "../services/db";
+import { getDevs, addDev, removeDev } from "../services/db";
 
 export const DevsContext = React.createContext();
 
@@ -16,7 +16,7 @@ export function DevsContextProvider({ children }) {
   }, []);
 
   return (
-    <DevsContext.Provider value={{ devs, addDev, fetchDevs }}>
+    <DevsContext.Provider value={{ devs, addDev, removeDev, fetchDevs }}>
       {children}
     </DevsContext.Provider>
   );

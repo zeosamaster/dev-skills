@@ -5,6 +5,15 @@ export async function addDev({ devId, skills }) {
   return data;
 }
 
+export async function removeDev({ devId }) {
+  const { data } = await api
+    .from("Devs")
+    .delete()
+    .match({ devId: Number(devId) });
+
+  return data;
+}
+
 export async function getDevs() {
   const { data } = await api
     .from("Devs")
