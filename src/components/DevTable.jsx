@@ -32,9 +32,9 @@ export function DevTable() {
         </Tr>
       </Thead>
       <Tbody>
-        <CurrentDev dev={currentDev} devId={devId} />
+        <CurrentDev key={devId} dev={currentDev} devId={devId} />
         {otherDevs.map((dev) => (
-          <Dev dev={dev} />
+          <Dev key={dev.devId} dev={dev} />
         ))}
       </Tbody>
     </Table>
