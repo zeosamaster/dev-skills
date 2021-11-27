@@ -3,7 +3,7 @@ import { ethers } from "ethers";
 import erc20abi from "./erc20.abi.json";
 
 const tokenAddresses = {
-  D4R: "0x25ed58c027921e14d86380ea2646e3a1b5c55a8b",
+  DEVS: "0x25ed58c027921e14d86380ea2646e3a1b5c55a8b",
 };
 
 function getEthereum() {
@@ -46,7 +46,7 @@ export const onAccountChange = (cb) => {
   getEthereum().on("accountsChanged", cb);
 };
 
-export const getDevId = async (symbol, account) => {
+export const getFirstTokenId = async (symbol, account) => {
   const contractId = tokenAddresses[symbol];
   const abi = erc20abi;
   const signer = getSigner();
@@ -58,4 +58,8 @@ export const getDevId = async (symbol, account) => {
   } catch (e) {
     return null;
   }
+};
+
+export const getDevId = async (account) => {
+  return await getFirstTokenId("DEVS", account);
 };

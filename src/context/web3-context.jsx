@@ -25,7 +25,7 @@ export function Web3ContextProvider({ children }) {
           throw Error("No account available");
         }
 
-        const id = await metamask.getDevId("D4R", acc);
+        const id = await metamask.getDevId(acc);
         setDevId(id);
         return id;
       } catch (e) {

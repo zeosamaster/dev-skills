@@ -17,7 +17,7 @@ function Account({ account, devId }) {
 
   return (
     <HStack spacing={6}>
-      <Badge fontSize="1em" px={3} py={1}>{devId ? `DEV #${devId}` : `No DEV tokens`}</Badge>
+      <Badge fontSize="1em" px={3} py={1}>{devId ? `DEV #${devId}` : `No DEVS tokens`}</Badge>
       <Badge fontSize="1em" px={3} py={1}>{truncatedAccount}...</Badge>
     </HStack>
   )
