@@ -12,19 +12,19 @@ function ConnectButton({ onClick }) {
   )
 }
 
-function Account({ account, token }) {
+function Account({ account, devId }) {
   const truncatedAccount = account.slice(0, 10);
 
   return (
     <HStack spacing={6}>
-      <Badge fontSize="1em" px={3} py={1}>{token ? `DEV #${token}` : `No DEV tokens`}</Badge>
+      <Badge fontSize="1em" px={3} py={1}>{devId ? `DEV #${devId}` : `No DEV tokens`}</Badge>
       <Badge fontSize="1em" px={3} py={1}>{truncatedAccount}...</Badge>
     </HStack>
   )
 }
 
 export function UserAccount() {
-  const { loading, account, token, connect } = React.useContext(Web3Context);
+  const { loading, account, devId, connect } = React.useContext(Web3Context);
 
   if (loading) {
     return null;
@@ -34,5 +34,5 @@ export function UserAccount() {
     return <ConnectButton onClick={connect} />;
   }
 
-  return <Account account={account} token={token} />
+  return <Account account={account} devId={devId} />
 }

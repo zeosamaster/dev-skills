@@ -5,7 +5,7 @@ export const Web3Context = React.createContext();
 
 export function Web3ContextProvider({ children }) {
   const [account, setAccount] = React.useState();
-  const [token, setToken] = React.useState();
+  const [devId, setDevId] = React.useState();
 
   const getConnectedAccount = React.useCallback(async () => {
     try {
@@ -16,7 +16,7 @@ export function Web3ContextProvider({ children }) {
       setAccount(null);
       return null;
     }
-  }, [setAccount, setToken]);
+  }, [setAccount, setDevId]);
 
   const getDevId = React.useCallback(
     async (acc) => {
@@ -25,15 +25,15 @@ export function Web3ContextProvider({ children }) {
           throw Error("No account available");
         }
 
-        const tok = await metamask.getDevId("D4R", acc);
-        setToken(tok);
-        return tok;
+        const id = await metamask.getDevId("D4R", acc);
+        setDevId(id);
+        return id;
       } catch (e) {
-        setToken(null);
+        setDevId(null);
         return null;
       }
     },
-    [setAccount, setToken]
+    [setAccount, setDevId]
   );
 
   React.useEffect(() => {
@@ -53,10 +53,10 @@ export function Web3ContextProvider({ children }) {
     } catch (e) { }
   }, [setAccount]);
 
-  const loading = account === undefined || token === undefined;
+  const loading = account === undefined || devId === undefined;
 
   return (
-    <Web3Context.Provider value={{ loading, account, token, connect }}>
+    <Web3Context.Provider value={{ loading, account, devId, connect }}>
       {children}
     </Web3Context.Provider>
   );
