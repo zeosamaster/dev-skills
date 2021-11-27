@@ -1,10 +1,12 @@
 import React from "react";
 import { Table, TableCaption, Thead, Tbody, Tr, Th } from "@chakra-ui/react";
 
+import { DevsContext } from "../context/devs-context";
 import { Web3Context } from "../context/web3-context";
 import { CurrentDev, Dev } from "./DevTableRow";
 
-export function DevTable({ devs }) {
+export function DevTable() {
+  const { devs } = React.useContext(DevsContext);
   const { devId } = React.useContext(Web3Context);
 
   if (!devs || !devs.length) {
