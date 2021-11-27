@@ -1,11 +1,17 @@
+#root {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
 main {
+  flex: 1 0 auto;
   align-content: center;
   box-sizing: border-box;
   hyphens: auto;
   line-height: 1.65;
   margin: 0 auto;
   max-width: 680px;
-  height: 100vh;
   padding: 36px 0 18px 0;
   text-align: center;
 }
