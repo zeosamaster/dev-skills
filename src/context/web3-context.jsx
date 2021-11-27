@@ -1,7 +1,9 @@
 import React from "react";
 import * as metamask from "../utils/metamask";
 
-export function useWeb3() {
+export const Web3Context = React.createContext();
+
+export function Web3ContextProvider({ children }) {
   const [account, setAccount] = React.useState();
   const [token, setToken] = React.useState();
 
@@ -48,13 +50,14 @@ export function useWeb3() {
     try {
       const account = await metamask.connectAccount();
       setAccount(account);
-    } catch (e) {}
+    } catch (e) { }
   }, [setAccount]);
 
-  return {
-    loading: account === undefined || token === undefined,
-    connect,
-    account,
-    token,
-  };
+  const loading = account === undefined || token === undefined;
+
+  return (
+    <Web3Context.Provider value={{ loading, account, token, connect }}>
+      {children}
+    </Web3Context.Provider>
+  );
 }

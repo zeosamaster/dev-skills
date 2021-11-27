@@ -2,7 +2,7 @@ import React from 'react';
 import { Button } from "@chakra-ui/button";
 import { Badge, HStack } from "@chakra-ui/layout";
 
-import { useWeb3 } from '../hooks/useWeb3';
+import { Web3Context } from '../context/web3-context';
 
 function ConnectButton({ onClick }) {
   return (
@@ -24,7 +24,7 @@ function Account({ account, token }) {
 }
 
 export function UserAccount() {
-  const { loading, account, token, connect } = useWeb3();
+  const { loading, account, token, connect } = React.useContext(Web3Context);
 
   if (loading) {
     return null;

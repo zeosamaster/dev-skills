@@ -11,29 +11,32 @@ import { Footer } from "./components/Footer";
 import { Login } from "./pages/Login";
 import { LoginMagicLink } from "./pages/LoginMagicLink";
 import { Signup } from "./pages/Signup";
+import { Web3ContextProvider } from "./context/web3-context";
 
 function App() {
   return (
     <ChakraProvider>
-      <BrowserRouter>
-        <Header />
-        <main>
-          <Flex flexFlow="column" h="full">
-            <Box flex="2 0 auto">
-              <Routes>
-                <Route path="/" element={<Devs />} />
-                <Route path="/add" element={<AddDev />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/login-magic-link" element={<LoginMagicLink />} />
-                <Route path="/signup" element={<Signup />} />
-              </Routes>
-            </Box>
-            <Box flex="0">
-              <Footer />
-            </Box>
-          </Flex>
-        </main>
-      </BrowserRouter>
+      <Web3ContextProvider>
+        <BrowserRouter>
+          <Header />
+          <main>
+            <Flex flexFlow="column" h="full">
+              <Box flex="2 0 auto">
+                <Routes>
+                  <Route path="/" element={<Devs />} />
+                  <Route path="/add" element={<AddDev />} />
+                  <Route path="/login" element={<Login />} />
+                  <Route path="/login-magic-link" element={<LoginMagicLink />} />
+                  <Route path="/signup" element={<Signup />} />
+                </Routes>
+              </Box>
+              <Box flex="0">
+                <Footer />
+              </Box>
+            </Flex>
+          </main>
+        </BrowserRouter>
+      </Web3ContextProvider>
     </ChakraProvider>
   );
 }
