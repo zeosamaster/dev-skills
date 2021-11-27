@@ -1,5 +1,11 @@
 import { ethers } from "ethers";
 
+import erc20abi from "./erc20.abi.json";
+
+const tokenAddresses = {
+  D4R: "0x25ed58c027921e14d86380ea2646e3a1b5c55a8b",
+};
+
 function getEthereum() {
   const { ethereum } = window;
 
@@ -38,4 +44,18 @@ export const connectAccount = async () => {
 
 export const onAccountChange = (cb) => {
   getEthereum().on("accountsChanged", cb);
+};
+
+export const getDevId = async (symbol, account) => {
+  const contractId = tokenAddresses[symbol];
+  const abi = erc20abi;
+  const signer = getSigner();
+
+  try {
+    const tokenInst = new ethers.Contract(contractId, abi, signer);
+    const tokenId = await tokenInst.tokenOfOwnerByIndex(account, 0);
+    return Number(tokenId);
+  } catch (e) {
+    return null;
+  }
 };
