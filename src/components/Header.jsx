@@ -1,5 +1,4 @@
 import { Flex, Heading } from "@chakra-ui/layout";
-import { Link } from "react-router-dom";
 import { UserAccount } from "./UserAccount";
 
 export function Header() {
@@ -15,11 +14,11 @@ export function Header() {
     >
       <Flex align="center" mr={5}>
         <Heading as="h1" size="lg" letterSpacing={"tighter"}>
-          <Link to="/">Dev DAO - Dev Skills</Link>
+          Dev DAO - Dev Skills
         </Heading>
       </Flex>
 
       <UserAccount />
     </Flex>
-  )
+  );
 }
